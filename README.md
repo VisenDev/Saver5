@@ -14,8 +14,8 @@ You must have golang installed
 ```
 
 
-# TODO
--For those who don't know how to use git/github. Do some research into how git works 
--Install Golang on your system
--Clone this repo to your home machine
--Test compilation to make sure that works
+# TODO for this group
+- Do some research into how git works 
+- Install Golang on your system
+- Clone this repo to your home machine
+- Test compilation to make sure that works
