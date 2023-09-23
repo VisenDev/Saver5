@@ -10,5 +10,5 @@ You must have golang installed
 ```
 >cd src 
 >go build main.go
->./src
+>./main
 ```
