@@ -6,6 +6,9 @@ CNC upload/download program
 - The source code for the previous upload/download program (Saver3) can be found in `docs` under `Saver3.bas`. The previous version was written in Visual Basic for Windows XP
 
 # To run the Demo
-$cd src 
-$go build main.go
-$./src
+You must have golang installed
+```
+>cd src 
+>go build main.go
+>./src
+```
