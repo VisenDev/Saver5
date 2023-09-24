@@ -7,10 +7,19 @@ CNC upload/download program
 
 # To run the Demo
 You must have golang installed
+
+
+*On Mac/linux*
 ```
->cd src 
->go build main.go
->./main
+$go build main.go
+$./Saver4
+```
+
+*On Windows*
+```
+$#TODO: test this compilation
+$go build main.go
+$Saver4.exe
 ```
 
 
