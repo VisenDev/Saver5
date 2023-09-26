@@ -11,14 +11,14 @@ You must have golang installed
 
 *On Mac/linux*
 ```
-$go build main.go
+$go build
 $./Saver4
 ```
 
 *On Windows*
 ```
 $#TODO: test this compilation
-$go build main.go
+$CGO_ENABLED=1 GOOS=windows go build go build
 $Saver4.exe
 ```
 
