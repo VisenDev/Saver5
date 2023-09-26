@@ -17,8 +17,7 @@ $./Saver4
 
 *On Windows*
 ```
-$#TODO: test this compilation
-$CGO_ENABLED=1 GOOS=windows go build go build
+$CGO_ENABLED=1 GOOS=windows go build
 $Saver4.exe
 ```
 
