@@ -8,13 +8,15 @@ CNC upload/download program
 # To run the Demo
 You need to have Go and gcc installed
 
-*On Mac/linux*
+### On Mac/Linux*
+- Note: on linux it may be neccessary to install some graphics libraries to provide the neccessary headers for compilation
 ```
 $go build
 $./Saver4
 ```
 
-*On Windows*
+### On Windows
+- Note that you will need to make sure mingw-gcc is installed and that `$CC` (the C compiler environment variable) is set correctly
 ```
 $CGO_ENABLED=1 GOOS=windows go build
 $Saver4.exe
@@ -25,3 +27,7 @@ For more info on compiling `fyne` gui libraries, see [fyne docs](https://develop
 
 # TODO for this group
 Try to compile and run the program
+
+# Useful links
+[Serial Port Basics](https://tldp.org/HOWTO/Serial-HOWTO-4.html)
+An article on debugging issues with usb to rs232 adapters can be found [here](https://www.campbellsci.com/blog/usb-rs-232-adapter-cable-issues)
