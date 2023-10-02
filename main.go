@@ -1,19 +1,25 @@
 package main
 
 import (
-   "log"
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-   "fyne.io/fyne/v2"
-   "fyne.io/fyne/v2/layout"
-   "fyne.io/fyne/v2/container"
 	"go.bug.st/serial"
+	"log"
 )
 
 func main() {
 	a := app.New()
 	w := a.NewWindow("Saver4")
+	w.Resize(fyne.Size{800, 400})
 
+	content := showSerialPorts(w)
+	w.SetContent(content)
+	w.ShowAndRun()
+}
+
+func showSerialPorts(w fyne.Window) fyne.CanvasObject {
 	ports, err := serial.GetPortsList()
 	if err != nil {
 		log.Fatal(err)
@@ -22,25 +28,21 @@ func main() {
 		log.Fatal("No serial ports found!")
 	}
 
-//   
-//	for _, port := range ports {
-//      w.SetContent(widget.NewLabel(port))
-//	}
+	list := container.NewGridWithRows(len(ports) + 1)
+	title := widget.NewLabel("Please Select a Serial Port")
 
-	list := widget.NewList(
-		func() int {
-			return len(ports)
-		},
-		func() fyne.CanvasObject {
-			return widget.NewLabel("template")
-		},
-		func(i widget.ListItemID, o fyne.CanvasObject) {
-			o.(*widget.Label).SetText(ports[i])
+	for i := 0; i < len(ports); i++ {
+      current_port := ports[i]
+		button := widget.NewButton(ports[i], func() {
+         message := widget.NewLabel("Serial Port Selected: " + current_port)
+         w.SetContent(message)
 		})
+		list.Add(button)
+	}
 
-   title := widget.NewLabel("All Available Serial Ports")
-   content := container.New(layout.NewHBoxLayout(), title, list, layout.NewSpacer())  
-   
-   w.SetContent(content)
-	w.ShowAndRun()
+	content := container.NewGridWithColumns(2)
+   content.Add(title)
+   content.Add(list)
+
+	return content 
 }
