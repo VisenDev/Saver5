@@ -6,8 +6,7 @@ CNC upload/download program
 - The source code for the previous upload/download program (Saver3) can be found in `docs` under `Saver3.bas`. The previous version was written in Visual Basic for Windows XP
 
 # To run the Demo
-You must have golang installed
-
+You need to have Go and gcc installed
 
 *On Mac/linux*
 ```
@@ -21,9 +20,8 @@ $CGO_ENABLED=1 GOOS=windows go build
 $Saver4.exe
 ```
 
+For more info on compiling `fyne` gui libraries, see [fyne docs](https://developer.fyne.io/started/cross-compiling)
+
 
 # TODO for this group
-- Do some research into how git works 
-- Install Golang on your system
-- Clone this repo to your home machine
-- Test compilation to make sure that works
+Try to compile and run the program
