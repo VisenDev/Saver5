@@ -29,5 +29,5 @@ For more info on compiling `fyne` gui libraries, see [fyne docs](https://develop
 Try to compile and run the program
 
 # Useful links
-[Serial Port Basics](https://tldp.org/HOWTO/Serial-HOWTO-4.html)
-An article on debugging issues with usb to rs232 adapters can be found [here](https://www.campbellsci.com/blog/usb-rs-232-adapter-cable-issues)
+- [Serial Port Basics](https://tldp.org/HOWTO/Serial-HOWTO-4.html)
+- An article on debugging issues with usb to rs232 adapters can be found [here](https://www.campbellsci.com/blog/usb-rs-232-adapter-cable-issues)
