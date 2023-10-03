@@ -19,12 +19,13 @@ func SerialSelectionMenu(config *SerialConfig) fyne.CanvasObject {
 	}
 
    //generate the title widget
-	port_selector_title := widget.NewLabel("Please Select a Serial Port")
+	title := widget.NewRichTextFromMarkdown("# Serial Configuration")
+	port_selector_title := widget.NewLabel("Please Select a Port")
    
    //generate the list of buttons to select por	//}
    port_selector := widget.NewSelect(ports, func(value string) {
       config.Port = value
 	})
 
-    return container.New(layout.NewVBoxLayout(), port_selector_title, port_selector)
+    return container.New(layout.NewVBoxLayout(), title, port_selector_title, port_selector)
 }

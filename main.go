@@ -18,32 +18,26 @@ func main() {
 	w := a.NewWindow("Saver4")
 	w.Resize(fyne.Size{800, 400})
 
-	
-   configuration := SerialConfig{
-       Port: "",
-       Settings: serial.Mode{
-           BaudRate: 57600,
-           Parity: serial.EvenParity,
-           DataBits: 7,
-           StopBits: serial.OneStopBit,
-       },
-   }
+	configuration := SerialConfig{
+		Port: "",
+		Settings: serial.Mode{
+			BaudRate: 57600,
+			Parity:   serial.EvenParity,
+			DataBits: 7,
+			StopBits: serial.OneStopBit,
+		},
+	}
 
-	//create tabs for each of our windows
+	// create tabs for each of our windows
 	tabs := container.NewAppTabs(
 		container.NewTabItem("Serial Port Config", SerialSelectionMenu(&configuration)),
-		container.NewTabItem("Upload", UploadMenu(&configuration)),
+		container.NewTabItem("Upload", UploadMenu(&configuration, &w)),
 		container.NewTabItem("Download", DownloadMenu(&configuration)),
 	)
 
 	tabs.SetTabLocation(container.TabLocationLeading)
 	w.SetContent(tabs)
 	w.ShowAndRun()
-}
-
-// TODO implement the Upload Menu
-func UploadMenu(config *SerialConfig) fyne.CanvasObject {
-	return widget.NewLabel("Upload Menu")
 }
 
 // TODO implement the Download Menu
