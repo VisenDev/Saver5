@@ -8,6 +8,7 @@ import (
 	"go.bug.st/serial"
 )
 
+//this struct stores the configuration details that will be passed to the upload/download backend
 type SerialConfig struct {
 	Port     string
 	Settings serial.Mode
@@ -15,9 +16,12 @@ type SerialConfig struct {
 
 func main() {
 	a := app.New()
+
+	//create a new window and resize it
 	w := a.NewWindow("Saver4")
 	w.Resize(fyne.Size{800, 400})
 
+	//initializing the configuration happens here
 	configuration := SerialConfig{
 		Port: "",
 		Settings: serial.Mode{
@@ -36,7 +40,11 @@ func main() {
 	)
 
 	tabs.SetTabLocation(container.TabLocationLeading)
+
+	//set the content of our window to show the tabs
 	w.SetContent(tabs)
+
+	//render the window
 	w.ShowAndRun()
 }
 

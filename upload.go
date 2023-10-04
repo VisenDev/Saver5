@@ -11,6 +11,7 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+//this function returns the UI for the upload menu
 func UploadMenu(config *SerialConfig, w *fyne.Window) fyne.CanvasObject {
 	title := widget.NewRichTextFromMarkdown("# Upload GCode")
 

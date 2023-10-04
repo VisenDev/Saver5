@@ -9,6 +9,7 @@ import (
 	"log"
 )
 
+//this function returns the UI for the configuration menu
 func SerialSelectionMenu(config *SerialConfig) fyne.CanvasObject {
 	ports, err := serial.GetPortsList()
 	if err != nil {
