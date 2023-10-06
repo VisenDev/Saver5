@@ -24,9 +24,9 @@ func main() {
 	configuration := SerialConfig{
 		Port: "",
 		Settings: serial.Mode{
-			BaudRate: 4800,
+			BaudRate: 57600,
 			Parity:   serial.EvenParity,
-			DataBits: 8,
+			DataBits: 7,
 			StopBits: serial.OneStopBit,
 		},
 	}
