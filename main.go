@@ -4,7 +4,6 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/widget"
 	"go.bug.st/serial"
 )
 
@@ -36,9 +35,8 @@ func main() {
 	tabs := container.NewAppTabs(
 		container.NewTabItem("Serial Port Config", SerialSelectionMenu(&configuration)),
 		container.NewTabItem("Upload", UploadMenu(&configuration, &w)),
-		container.NewTabItem("Download", DownloadMenu(&configuration)),
+		container.NewTabItem("Download", DownloadMenu(&configuration, &w)),
 	)
-
 	tabs.SetTabLocation(container.TabLocationLeading)
 
 	//set the content of our window to show the tabs
@@ -46,9 +44,4 @@ func main() {
 
 	//render the window
 	w.ShowAndRun()
-}
-
-// TODO implement the Download Menu
-func DownloadMenu(config *SerialConfig) fyne.CanvasObject {
-	return widget.NewLabel("Download Menu")
 }
