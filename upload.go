@@ -37,6 +37,10 @@ func UploadMenu(config *SerialConfig, w *fyne.Window) fyne.CanvasObject {
 	// Shows a preview of the file contents
 	preview := widget.NewRichTextFromMarkdown("")
 
+	//contain the preview in a container with a scroll bar
+	preview_wrapper := container.NewScroll(preview)
+	preview_wrapper.SetMinSize(fyne.Size{100, 300})
+
 	//logic for the preview selected file button
 	preview_button := widget.NewButton("Preview Selected File", func() {
 		filepath := input.Text
@@ -54,6 +58,11 @@ func UploadMenu(config *SerialConfig, w *fyne.Window) fyne.CanvasObject {
 		}
 	})
 
+	//logic for Upload
+	upload_button := widget.NewButton("Upload!", func() {})
+
+	button_wrapper := container.New(layout.NewGridLayout(3), filepicker_button, preview_button, upload_button)
+
 	//combine all of the widgets and return
-	return container.New(layout.NewVBoxLayout(), title, input, filepicker_button, preview_button, preview)
+	return container.New(layout.NewVBoxLayout(), title, input, button_wrapper, preview_wrapper)
 }
