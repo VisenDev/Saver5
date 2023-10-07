@@ -18,7 +18,7 @@ $./Saver4
 ### On Windows
 - Note that you will need to make sure mingw-gcc is installed and that `$CC` (the C compiler environment variable) is set correctly
 ```
-$CGO_ENABLED=1 GOOS=windows go build
+$CGO_ENABLED=1 GOOS=windows CC=x86_64-w64-mingw32-gcc go build
 $Saver4.exe
 ```
 
