@@ -36,9 +36,11 @@ func main() {
 		container.NewTabItem("Serial Port Config", SerialSelectionMenu(&configuration)),
 		container.NewTabItem("Upload", UploadMenu(&configuration, &w)),
 		container.NewTabItem("Download", DownloadMenu(&configuration, &w)),
+      container.NewTabItem("Help" , HelpMenu(&configuration)),
 	)
+   
 	tabs.SetTabLocation(container.TabLocationLeading)
-
+   
 	//set the content of our window to show the tabs
 	w.SetContent(tabs)
 
