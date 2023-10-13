@@ -11,18 +11,20 @@ You need to have Go and gcc installed
 ### On Mac/Linux*
 - Note: on linux it may be neccessary to install some graphics libraries to provide the neccessary headers for compilation
 ```
-$go build
-$./Saver4
+$ go build
+$ ./Saver5
 ```
 
 ### On Windows
 - Note that you will need to make sure mingw-gcc is installed and that `$CC` (the C compiler environment variable) is set correctly
 ```
-$CGO_ENABLED=1 GOOS=windows CC=x86_64-w64-mingw32-gcc go build
-$Saver4.exe
+$ CGO_ENABLED=1 GOOS=windows CC=x86_64-w64-mingw32-gcc go build
+$ Saver5.exe
 ```
 
 For more info on compiling `fyne` gui libraries, see [fyne docs](https://developer.fyne.io/started/cross-compiling)
+
+If you have troubling installing `go` and `gcc` on windows, you can run the `configure.sh` script to locally install necessary compilers to your project directory and compile the program with them. This will download the compilers if they have not been previously downloaded, then compile the project.
 
 
 # TODO for this group
