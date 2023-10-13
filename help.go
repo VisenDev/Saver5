@@ -10,6 +10,6 @@ import (
 )
 
 //this function returns the UI for the help menu
-func HelpMenu(config *SerialConfig) fyne.CanvasObject {
+func HelpMenu() fyne.CanvasObject {
 	return widget.NewLabel("This is the help menu!")
 }

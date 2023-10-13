@@ -17,7 +17,7 @@ func main() {
 	a := app.New()
 
 	//create a new window and resize it
-	w := a.NewWindow("Saver4")
+	w := a.NewWindow("Saver5")
 	w.Resize(fyne.Size{800, 400})
 
 	//initializing the configuration happens here
@@ -36,7 +36,7 @@ func main() {
 		container.NewTabItem("Serial Port Config", SerialSelectionMenu(&configuration)),
 		container.NewTabItem("Upload", UploadMenu(&configuration, &w)),
 		container.NewTabItem("Download", DownloadMenu(&configuration, &w)),
-      container.NewTabItem("Help" , HelpMenu(&configuration)),
+      container.NewTabItem("Help" , HelpMenu()),
 	)
    
 	tabs.SetTabLocation(container.TabLocationLeading)
