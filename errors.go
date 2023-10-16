@@ -6,6 +6,6 @@ import (
 )
 
 func DisplayError(w *fyne.Window, err string) {
-	popup := widget.NewRichTextFromMarkdown("# " + err )
-   widget.ShowPopUp(popup, (*w).Canvas())
+	popup := widget.NewRichTextFromMarkdown("# " + err)
+	widget.ShowPopUp(popup, (*w).Canvas())
 }

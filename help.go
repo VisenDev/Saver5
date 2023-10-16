@@ -1,4 +1,4 @@
-package main 
+package main
 
 import (
 	"fyne.io/fyne/v2"
@@ -9,7 +9,7 @@ import (
 	//"log"
 )
 
-//this function returns the UI for the help menu
+// this function returns the UI for the help menu
 func HelpMenu() fyne.CanvasObject {
 	return widget.NewLabel("This is the help menu!")
 }

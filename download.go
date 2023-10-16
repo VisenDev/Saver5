@@ -7,7 +7,7 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-func DownloadMenu(config *SerialConfig, w *fyne.Window) fyne.CanvasObject {
+func DownloadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 	title := widget.NewRichTextFromMarkdown("# Download GCode From Machine")
 
 	// input to enter a filepath
