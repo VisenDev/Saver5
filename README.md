@@ -24,9 +24,6 @@ $ Saver5.exe
 
 For more info on compiling `fyne` gui libraries, see [fyne docs](https://developer.fyne.io/started/cross-compiling)
 
-If you have troubling installing `go` and `gcc` on windows, you can run the `configure.sh` script to locally install necessary compilers to your project directory and compile the program with them. This will download the compilers if they have not been previously downloaded, then compile the project.
-
-
 # TODO for this group
 Try to compile and run the program
 
