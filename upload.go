@@ -9,6 +9,8 @@ import (
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
+
+	"github.com/mitchellh/go-homedir"
 )
 
 // this function returns the UI for the upload menu
@@ -43,7 +45,8 @@ func UploadMenu(config *SerialConfig, w *fyne.Window) fyne.CanvasObject {
 
 	// logic for the preview selected file button
 	preview_button := widget.NewButton("Preview Selected File", func() {
-		filepath := input.Text
+		filepath, err := homedir.Expand(input.Text)
+		_ = err
 
 		if filepath == "" {
 			DisplayError(w, "No File Chosen")
@@ -52,7 +55,7 @@ func UploadMenu(config *SerialConfig, w *fyne.Window) fyne.CanvasObject {
 
 		bytes, err := os.ReadFile(filepath)
 		if err != nil {
-			DisplayError(w, "Failed to Open File: "+filepath)
+			DisplayError(w, "Failed to Open File: " + filepath)
 			return
 		}
 
@@ -62,7 +65,8 @@ func UploadMenu(config *SerialConfig, w *fyne.Window) fyne.CanvasObject {
 
 	// logic for Upload
 	upload_button := widget.NewButton("Upload!", func() {
-		filepath := input.Text
+		filepath, err := homedir.Expand(input.Text)
+		_ = err
 
 		if config.Port == "" {
 			DisplayError(w, "No Port Chosen")

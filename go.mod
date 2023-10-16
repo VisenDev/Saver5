@@ -6,6 +6,7 @@ require (
 	fyne.io/fyne/v2 v2.4.0
 	gioui.org v0.3.0
 	github.com/gen2brain/raylib-go/raylib v0.0.0-20230928181314-dc2584151090
+	github.com/mitchellh/go-homedir v1.0.0
 	go.bug.st/serial v1.6.1
 )
 
