@@ -11,22 +11,32 @@ import (
 
 // this function returns the UI for the configuration menu
 func SerialSelectionMenu(m *Model) fyne.CanvasObject {
-	ports, err := serial.GetPortsList()
+
+	//generate the title widget
+	title := widget.NewRichTextFromMarkdown("# Serial Configuration")
+	port_selector_title := widget.NewLabel("Please Select a Port")
+
+	port_selector := CreateSerialSelection(m)
+   
+   refresh_button := widget.NewButton("Refresh Serial Ports", func() {
+      port_selector = CreateSerialSelection(m)
+	})
+
+	return container.New(layout.NewVBoxLayout(), title, port_selector_title, port_selector, refresh_button)
+}
+
+func CreateSerialSelection(m *Model) fyne.CanvasObject {
+   ports, err := serial.GetPortsList()
 	if err != nil {
 		log.Fatal(err)
 	}
 	if len(ports) == 0 {
 		return widget.NewLabel("Fatal Error: No serial ports found!")
 	}
-
-	//generate the title widget
-	title := widget.NewRichTextFromMarkdown("# Serial Configuration")
-	port_selector_title := widget.NewLabel("Please Select a Port")
-
-	//generate the list of buttons to select por	//}
+   //generate the list of buttons to select por	//
 	port_selector := widget.NewSelect(ports, func(value string) {
 		m.Config.Port = value
 	})
-
-	return container.New(layout.NewVBoxLayout(), title, port_selector_title, port_selector)
+   
+   return port_selector
 }
