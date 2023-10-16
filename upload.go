@@ -1,16 +1,15 @@
 package main
 
 import (
-	"log"
 	"os"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 
 	"github.com/mitchellh/go-homedir"
+	"github.com/gen2brain/dlgs"
 )
 
 // this function returns the UI for the upload menu
@@ -23,17 +22,13 @@ func UploadMenu(config *SerialConfig, w *fyne.Window) fyne.CanvasObject {
 
 	// button to pick a file
 	filepicker_button := widget.NewButton("Select a file to upload", func() {
-		filepicker := dialog.NewFileOpen(func(url fyne.URIReadCloser, err error) {
-			if err != nil {
-				log.Fatal(err)
-			}
-			if url != nil {
-				filepath := url.URI().Path()
-				input.SetText(filepath)
-			}
-		}, *w)
-		// show filepicker if button is pressed
-		filepicker.Show()
+		filepath, _, err := dlgs.File("Select a file", "", false)
+		
+		if err != nil {
+			DisplayError(w, "Failed to open file")
+		} else {
+			input.SetText(filepath)
+		}
 	})
 
 	// Shows a preview of the file contents
