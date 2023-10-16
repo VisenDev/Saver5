@@ -21,5 +21,6 @@ if [ ! -d "w64devkit" ]; then
 fi
 
 echo "[ATTEMPING TO COMPILE]"
+PATH+=":$PWD/w64devkit/bin"
 COMPILER="/w64devkit/bin/x86_64-w64-mingw32-gcc.exe" 
 CC="$PWD$COMPILER" CGO_ENABLED=1 GOOS=windows $GOBIN build
