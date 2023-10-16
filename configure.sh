@@ -22,5 +22,6 @@ fi
 
 echo "[ATTEMPING TO COMPILE]"
 PATH+=":$PWD/w64devkit/bin"
+PATH+=":$PWD/w64devkit/libexec/gcc/x86_64-w64-mingw32/13.2.0"
 COMPILER="/w64devkit/bin/x86_64-w64-mingw32-gcc.exe" 
 CC="$PWD$COMPILER" CGO_ENABLED=1 GOOS=windows $GOBIN build
