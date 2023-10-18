@@ -1,18 +1,36 @@
 package main
 
 import (
+	"net/url"
+
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 )
 
-// this function returns the UI for the help menu
+// HelpMenu returns the UI for the help menu.
 func HelpMenu() fyne.CanvasObject {
-	title := widget.NewRichTextFromMarkdown("# Help")
-	sub_title_1 :=  widget.NewRichTextFromMarkdown( "## My serial cable is not showing up on Windows" )
-	content_1 := widget.NewRichTextFromMarkdown("- In order to use this application with an usb-to-rs232 adapter on windows, \n a serial driver will most likely need to be downloaded. \n Drivers for FTDI chip powered adapters can be found [here](https://ftdichip.com/drivers/vcp-drivers/)")
-//	content := widget.NewRichTextFromMarkdown( " ## My serial cable is not showing up on Windows \n In order to use this application with an usb-to-rs232 adapter on windows, \n a serial driver will most likely need to be downloaded. \n Drivers for FTDI chip powered adapters can be found [here](https://ftdichip.com/drivers/vcp-drivers/)")
-	return container.New(layout.NewVBoxLayout(), title, sub_title_1, content_1)
 
+	title := widget.NewLabelWithStyle("Help", fyne.TextAlignCenter, fyne.TextStyle{Bold: true})
+
+	subTitle1 := widget.NewLabelWithStyle("My Serial Cable is Not Showing up on Windows", fyne.TextAlignLeading, fyne.TextStyle{Bold: true})
+
+	content1 := widget.NewLabel("To use this application with a USB-to-RS232 adapter on Windows, a serial driver will most likely need to be downloaded.")
+	content2 := widget.NewLabel("Drivers for FTDI chip-powered adapters can be found here:")
+
+	linkURL, _ := url.Parse("https://ftdichip.com/drivers/vcp-drivers/")
+	link := widget.NewHyperlink("FTDI Drivers", linkURL)
+
+	contentContainer := container.NewVBox(content1, content2, container.NewHBox(layout.NewSpacer(), link, layout.NewSpacer()))
+
+	return container.NewVBox(
+		layout.NewSpacer(),
+		title,
+		layout.NewSpacer(),
+		subTitle1,
+		layout.NewSpacer(),
+		contentContainer,
+		layout.NewSpacer(),
+	)
 }
