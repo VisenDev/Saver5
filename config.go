@@ -9,7 +9,6 @@ import (
 	"log"
 )
 
-// this function returns the UI for the configuration menu
 func SerialSelectionMenu(m *Model) fyne.CanvasObject {
 
 	//generate the title widget
@@ -25,6 +24,7 @@ func SerialSelectionMenu(m *Model) fyne.CanvasObject {
 	return container.New(layout.NewVBoxLayout(), title, port_selector_title, port_selector, refresh_button)
 }
 
+// this function returns the UI for the configuration menu
 func CreateSerialSelection(m *Model) fyne.CanvasObject {
    ports, err := serial.GetPortsList()
 	if err != nil {

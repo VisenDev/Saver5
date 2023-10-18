@@ -4,6 +4,7 @@ import (
 	"github.com/mitchellh/go-homedir"
 	"go.bug.st/serial"
 	"os"
+	"time"
 )
 
 // this struct stores the configuration details that will be passed to the upload/download backend
@@ -56,16 +57,22 @@ func DefaultModel() Model {
 	}
 }
 
+//uploads the file in the model to the port in the model
 func (m *Model) Upload() (int, error) {
+
 	port, err := serial.Open(m.Config.Port, &m.Config.Settings)
+
 	if err != nil {
 		return 0, err
 	}
+
+	time.Sleep(10 * time.Seconds)
 
 	//TODO close the port
 	str, err := m.ReadUploadFile()
 	if err != nil {
 		return 0, err
 	}
+	
 	return port.Write([]byte(str))
 }

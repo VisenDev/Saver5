@@ -6,6 +6,7 @@ import (
 	"fyne.io/fyne/v2/container"
 )
 
+//program entry point
 func main() {
 	a := app.New()
 

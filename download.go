@@ -7,6 +7,7 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+//this function creates the UI for the download menu
 func DownloadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 	title := widget.NewRichTextFromMarkdown("# Download GCode From Machine")
 

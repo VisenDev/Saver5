@@ -17,6 +17,7 @@ $ ./Saver5
 
 ### On Windows
 - Note that you will need to make sure mingw-gcc is installed and that `$CC` (the C compiler environment variable) is set correctly
+- For Instructions on installing mingw-gcc, see [here](https://code.visualstudio.com/docs/cpp/config-mingw)
 ```
 $ CGO_ENABLED=1 GOOS=windows CC=x86_64-w64-mingw32-gcc go build
 $ Saver5.exe
