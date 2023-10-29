@@ -66,7 +66,7 @@ func (m *Model) Upload() (int, error) {
 		return 0, err
 	}
 
-	time.Sleep(10 * time.Seconds)
+	time.Sleep(10)
 
 	//TODO close the port
 	str, err := m.ReadUploadFile()

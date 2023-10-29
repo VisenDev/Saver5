@@ -6,13 +6,11 @@ require (
 	fyne.io/fyne/v2 v2.4.0
 	github.com/gen2brain/dlgs v0.0.0-20220603100644-40c77870fa8d
 	github.com/mitchellh/go-homedir v1.0.0
-	github.com/sqweek/dialog v0.0.0-20220809060634-e981b270ebbf
 	go.bug.st/serial v1.6.1
 )
 
 require (
 	fyne.io/systray v1.10.1-0.20230722100817-88df1e0ffa9a // indirect
-	github.com/TheTitanrain/w32 v0.0.0-20180517000239-4f5cfb03fabf // indirect
 	github.com/creack/goselect v0.1.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fredbi/uri v1.0.0 // indirect
