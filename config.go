@@ -9,19 +9,38 @@ import (
 	"log"
 )
 
-func SerialSelectionMenu(m *Model) fyne.CanvasObject {
+func SerialSelectionMenu(m *Model,  w *fyne.Window) fyne.CanvasObject {
 
 	//generate the title widget
-	title := widget.NewRichTextFromMarkdown("# Serial Configuration")
-	port_selector_title := widget.NewLabel("Please Select a Port")
-
+	//title := widget.NewRichTextFromMarkdown("# Serial Configuration")
+	//port_selector_title := widget.NewLabel("Please Select a Port")
 	port_selector := CreateSerialSelection(m)
+	selector := container.New(layout.NewMaxLayout(), port_selector)
    
    refresh_button := widget.NewButton("Refresh Serial Ports", func() {
       port_selector = CreateSerialSelection(m)
 	})
+	
+	progress_bar := widget.NewProgressBarInfinite()
+	progress_bar.Stop()
+	connection_label := widget.NewLabel("Not Connected");
+	connection_status := container.New(layout.NewVBoxLayout(), connection_label, progress_bar);
+	
+	connect_button := widget.NewButton("Check Connection", func() {
+		var err error
+		m.ChosenPort, err = serial.Open(m.Config.Port, &m.Config.Settings)	
+		if err != nil {
+			DisplayError(w, "Failed to open port")
+			progress_bar.Stop()
+			connection_label.SetText("Not Connected")
+			return
+		}
+		progress_bar.Start()
+		connection_label.SetText("Connected to " + m.Config.Port)
+	})
 
-	return container.New(layout.NewVBoxLayout(), title, port_selector_title, port_selector, refresh_button)
+	content := container.New(layout.NewVBoxLayout(), selector, refresh_button, connect_button)
+	return container.New(layout.NewVBoxLayout(), content, layout.NewSpacer(), connection_status)
 }
 
 // this function returns the UI for the configuration menu

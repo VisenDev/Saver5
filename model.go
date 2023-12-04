@@ -4,7 +4,8 @@ import (
 	"github.com/mitchellh/go-homedir"
 	"go.bug.st/serial"
 	"os"
-	"time"
+	"fyne.io/fyne/v2"
+	"errors"
 )
 
 // this struct stores the configuration details that will be passed to the upload/download backend
@@ -16,8 +17,11 @@ type SerialConfig struct {
 // The model of MVC, stores internal state
 type Model struct {
 	Config           SerialConfig
+	ChosenPort		  serial.Port
 	UploadFilepath   string
+	UploadFileBuffer string
 	DownloadFilepath string
+	DownloadFileBuffer string
 }
 
 // sets the upload filepath
@@ -58,15 +62,17 @@ func DefaultModel() Model {
 }
 
 //uploads the file in the model to the port in the model
-func (m *Model) Upload() (int, error) {
+func (m *Model) Upload(w *fyne.Window) (int, error) {
 
-	port, err := serial.Open(m.Config.Port, &m.Config.Settings)
-
-	if err != nil {
-		return 0, err
+	//m.ChosenPort, err := serial.Open(m.Config.Port, &m.Config.Settings)
+	if m.ChosenPort == nil {
+		DisplayError(w, "Port is not open")
+		return 0, errors.New("no open port");
 	}
 
-	time.Sleep(10)
+	//if err != nil {
+	//	return 0, err
+	//}
 
 	//TODO close the port
 	str, err := m.ReadUploadFile()
@@ -74,5 +80,5 @@ func (m *Model) Upload() (int, error) {
 		return 0, err
 	}
 	
-	return port.Write([]byte(str))
+	return m.ChosenPort.Write([]byte(str))
 }

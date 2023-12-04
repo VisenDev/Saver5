@@ -29,7 +29,7 @@ func UploadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 	})
 
 	// Shows a preview of the file contents
-	preview := widget.NewRichTextFromMarkdown("")
+	preview := widget.NewTextGrid()
 
 	// contain the preview in a container with a scroll bar
 	preview_wrapper := container.NewScroll(preview)
@@ -45,7 +45,8 @@ func UploadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 			DisplayError(w, "Failed to read file")
 		} else {
 			// set contents to loaded file
-			preview.ParseMarkdown("```\n" + file_contents + "\n```")
+			//preview.ParseMarkdown("```\n" + file_contents + "\n```")
+			preview.SetText(file_contents)
 		}
 	})
 
@@ -55,7 +56,7 @@ func UploadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 		if err != nil {
 			DisplayError(w, "failed to parse filepath")
 		}
-		_, err = model.Upload()
+		_, err = model.Upload(w)
 		if err != nil {
 			DisplayError(w, "failed to upload file")
 		}

@@ -5,32 +5,25 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/layout"
+	//"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 )
 
 // HelpMenu returns the UI for the help menu.
 func HelpMenu() fyne.CanvasObject {
 
-	title := widget.NewLabelWithStyle("Help", fyne.TextAlignCenter, fyne.TextStyle{Bold: true})
-
-	subTitle1 := widget.NewLabelWithStyle("My Serial Cable is Not Showing up on Windows", fyne.TextAlignLeading, fyne.TextStyle{Bold: true})
-
-	content1 := widget.NewLabel("To use this application with a USB-to-RS232 adapter on Windows, a serial driver will most likely need to be downloaded.")
-	content2 := widget.NewLabel("Drivers for FTDI chip-powered adapters can be found here:")
-
+	driver_text := widget.NewLabel("To use this application with a USB-to-RS232 adapter on Windows,\na serial driver will most likely need to be downloaded.\nDrivers for FTDI chip-powered adapters can be found here: ")
 	linkURL, _ := url.Parse("https://ftdichip.com/drivers/vcp-drivers/")
 	link := widget.NewHyperlink("FTDI Drivers", linkURL)
+	driver_content := container.NewVBox(driver_text, link)
+	driver_accordion := widget.NewAccordionItem("No Serial Ports Found on Windows", driver_content)
 
-	contentContainer := container.NewVBox(content1, content2, container.NewHBox(layout.NewSpacer(), link, layout.NewSpacer()))
+	ports_text := widget.NewLabel("Your computer does not have any serial ports,\nyou need to use a USB-to-RS232 adapter and install its driver\nThen relaunch or refresh the application")
+	ports_accordion := widget.NewAccordionItem("No Serial Ports Found", ports_text)
+
+	page_content := widget.NewAccordion(driver_accordion, ports_accordion)
 
 	return container.NewVBox(
-		layout.NewSpacer(),
-		title,
-		layout.NewSpacer(),
-		subTitle1,
-		layout.NewSpacer(),
-		contentContainer,
-		layout.NewSpacer(),
+		page_content,
 	)
 }

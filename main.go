@@ -19,7 +19,7 @@ func main() {
 
 	// create tabs for each of our windows
 	tabs := container.NewAppTabs(
-		container.NewTabItem("Serial Port Config", SerialSelectionMenu(&model)),
+		container.NewTabItem("Serial Port Config", SerialSelectionMenu(&model, &w)),
 		container.NewTabItem("Upload", UploadMenu(&model, &w)),
 		container.NewTabItem("Download", DownloadMenu(&model, &w)),
 		container.NewTabItem("Help", HelpMenu()),
