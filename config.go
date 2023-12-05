@@ -28,7 +28,7 @@ func SerialSelectionMenu(m *Model,  w *fyne.Window) fyne.CanvasObject {
 	
 	connect_button := widget.NewButton("Check Connection", func() {
 		var err error
-		m.ChosenPort, err = serial.Open(m.Config.Port, &m.Config.Settings)	
+		m.Port , err = serial.Open(m.Config.Port, &m.Config.Settings)	
 		if err != nil {
 			DisplayError(w, "Failed to open port")
 			progress_bar.Stop()

@@ -4,7 +4,6 @@ import (
 	"github.com/mitchellh/go-homedir"
 	"go.bug.st/serial"
 	"os"
-	"fyne.io/fyne/v2"
 	"errors"
 )
 
@@ -17,7 +16,7 @@ type SerialConfig struct {
 // The model of MVC, stores internal state
 type Model struct {
 	Config           SerialConfig
-	ChosenPort		  serial.Port
+	Port		  serial.Port
 	UploadFilepath   string
 	UploadFileBuffer string
 	DownloadFilepath string
@@ -35,13 +34,34 @@ func (self *Model) SetUploadFilepath(path string) error {
 	return nil
 }
 
+func (self *Model) SetDownloadFilepath(path string) error {
+	filepath, err := homedir.Expand(path)
+	if err != nil {
+		return err
+	}
+
+	self.DownloadFilepath = filepath
+	return nil
+}
+
+
+
+func (self *Model) WriteDownloadFile() error {
+	err := os.WriteFile(self.DownloadFilepath, []byte(self.DownloadFileBuffer), 0)
+	if err != nil {
+		return  err
+	}
+	return nil;
+}
+
 // reads the value of the upload filepath
-func (self *Model) ReadUploadFile() (string, error) {
+func (self *Model) ReadUploadFile() error {
 	bytes, err := os.ReadFile(self.UploadFilepath)
 	if err != nil {
-		return "", err
+		return  err
 	}
-	return string(bytes), nil
+	self.UploadFileBuffer = string(bytes)
+	return nil
 }
 
 // initalizes with proper defaults
@@ -58,27 +78,24 @@ func DefaultModel() Model {
 		},
 		UploadFilepath:   "",
 		DownloadFilepath: "",
+		UploadFileBuffer: "",
+		DownloadFileBuffer: "",
+		Port: nil,
 	}
 }
 
 //uploads the file in the model to the port in the model
-func (m *Model) Upload(w *fyne.Window) (int, error) {
+func (m *Model) Upload() (int, error) {
 
-	//m.ChosenPort, err := serial.Open(m.Config.Port, &m.Config.Settings)
-	if m.ChosenPort == nil {
-		DisplayError(w, "Port is not open")
+	//m.Port, err := serial.Open(m.Config.Port, &m.Config.Settings)
+	if m.Port == nil {
 		return 0, errors.New("no open port");
 	}
 
-	//if err != nil {
-	//	return 0, err
-	//}
-
-	//TODO close the port
-	str, err := m.ReadUploadFile()
+	err := m.ReadUploadFile()
 	if err != nil {
 		return 0, err
 	}
-	
-	return m.ChosenPort.Write([]byte(str))
+
+	return m.Port.Write([]byte(m.UploadFileBuffer))
 }

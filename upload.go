@@ -39,14 +39,12 @@ func UploadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 	preview_button := widget.NewButton("Preview Selected File", func() {
 
 		model.SetUploadFilepath(input.Text)
-		file_contents, err := model.ReadUploadFile()
+		err := model.ReadUploadFile();
 
 		if err != nil {
 			DisplayError(w, "Failed to read file")
 		} else {
-			// set contents to loaded file
-			//preview.ParseMarkdown("```\n" + file_contents + "\n```")
-			preview.SetText(file_contents)
+			preview.SetText(model.UploadFileBuffer)
 		}
 	})
 
@@ -56,7 +54,7 @@ func UploadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 		if err != nil {
 			DisplayError(w, "failed to parse filepath")
 		}
-		_, err = model.Upload(w)
+		_, err = model.Upload()
 		if err != nil {
 			DisplayError(w, "failed to upload file")
 		}
