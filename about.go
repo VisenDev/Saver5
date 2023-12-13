@@ -10,8 +10,8 @@ import (
 // HelpMenu returns the UI for the help menu.
 
 func AboutMenu() fyne.CanvasObject {
-	header := widget.NewLabel("KAGER INDUSTRIES - SAVER5")
-	page_content := widget.NewLabel("Written by:\n-Robert Burnett\n\nCo-Designed by:\n-Connor Bumann\n-Elizabeth Salyards\n-Eduardo")
+	header := widget.NewRichTextFromMarkdown("# KAGER INDUSTRIES - SAVER5")
+	page_content := widget.NewRichTextFromMarkdown("Written by:\n - Robert Burnett\n \n Designed by:\n - Robert Burnett\n - Connor Bumann\n - Elizabeth Salyards\n - Eduardo Palacious ")
 
 	return container.NewVBox(
 		header,

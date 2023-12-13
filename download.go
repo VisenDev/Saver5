@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gen2brain/dlgs"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
@@ -18,35 +19,27 @@ func DownloadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 		preview.SetText(string(model.DownloadFileBuffer[0:model.DownloadBufLen]))
 	})
 	
-	//listen_button := widget.NewButton("Wait for input", func(){
-	//	if model.Port == nil {
-	//		DisplayError(w, "no open port")
-	//		return
-	//	}
-	//	
-	//	buff := make([]byte, 100000)
-	//	sum := 0
-
-	//	//t, _ := time.ParseDuration("500ms")
-	//	//_ = model.Port.SetReadTimeout(t)
-	//	
-	//	for {
-	//		n, err := go model.Port.Read(buff)
-	//		if err != nil {
-	//			DisplayError(w, "error reading from port")
-	//			return
-	//		}
-	//		if n == 0 {
-	//			break
-	//		}
-	//		sum += n
-	//		fmt.Println(string(buff))
-	//		model.DownloadFileBuffer = string(buff[0:sum])
-	//		preview.SetText(model.DownloadFileBuffer)
-	//	}
-	//})
-
 	title := widget.NewRichTextFromMarkdown("# Recieved Text")
 
-	return container.New(layout.NewVBoxLayout(), title, preview)
+	clear_button := widget.NewButton("Clear Buffer", func(){
+		model.DownloadBufLen = 0
+		preview.SetText(string(model.DownloadFileBuffer[0:model.DownloadBufLen]))
+	})
+
+
+	//input := widget.NewEntry()
+	//?/input.SetPlaceHolder("Enter filepath or select file...")
+	
+	save_button := widget.NewButton("Save To File", func(){
+		filepath, _, err := dlgs.File("Select a file", "", false)
+
+		if err != nil {
+			DisplayError(w, "Failed to select file")
+		} else {
+			model.SetDownloadFilepath(filepath)
+			model.WriteDownloadFile()
+		}
+	})
+
+	return container.New(layout.NewVBoxLayout(), title, save_button, layout.NewSpacer(), clear_button, preview)
 }

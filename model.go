@@ -49,7 +49,7 @@ func (self *Model) SetDownloadFilepath(path string) error {
 }
 
 func (self *Model) WriteDownloadFile() error {
-	err := os.WriteFile(self.DownloadFilepath, []byte(self.DownloadFileBuffer), 0)
+	err := os.WriteFile(self.DownloadFilepath, self.DownloadFileBuffer[0:self.DownloadBufLen], 0)
 	if err != nil {
 		return err
 	}
@@ -107,7 +107,7 @@ func (m *Model) Listen(callback func()) {
 	go func() {
 		for {
 			if m.Port == nil {
-				fmt.Println("port is nil")
+				//fmt.Println("port is nil")
 				//time.Sleep(1 * time.Second)
 			} else {
 				fmt.Println(m.Config.Port)
@@ -127,4 +127,18 @@ func (m *Model) Listen(callback func()) {
 			}
 		}
 	}()
+}
+
+func (m *Model) Save() (int, error) {
+	// m.Port, err := serial.Open(m.Config.Port, &m.Config.Settings)
+	if m.Port == nil {
+		return 0, errors.New("no open port")
+	}
+
+	err := m.ReadUploadFile()
+	if err != nil {
+		return 0, err
+	}
+
+	return m.Port.Write([]byte(m.UploadFileBuffer))
 }
