@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
-	"time"
+	//"time"
 
 	"github.com/mitchellh/go-homedir"
 	"go.bug.st/serial"
@@ -110,19 +110,27 @@ func (m *Model) Listen(callback func()) {
 				//fmt.Println("port is nil")
 				//time.Sleep(1 * time.Second)
 			} else {
-				fmt.Println(m.Config.Port)
 				
-				t, _ := time.ParseDuration("500ms")
-				_ = m.Port.SetReadTimeout(t)
+				//t, _ := time.ParseDuration("500ms")
+				//_ = m.Port.SetReadTimeout(t)
+				
+				//m.Port.Close()
+				//var err error
+				//m.Port, err = serial.Open(m.Config.Port, &m.Config.Settings)	
+				//if err != nil {
+					//continue
+				//}
+				
+				//fmt.Println(m.Config.Port)
 				n, err := m.Port.Read(m.DownloadFileBuffer)
-				if err != nil && n > 0 {
-					fmt.Println("read data")
+				
+				//fmt.Print("read in lines: ")
+				//fmt.Println(n)
+				if err == nil && n > 0 {
 					callback()
 					m.DownloadBufLen += n
-				} else {
-					fmt.Println("error: ")
+				} else if err != nil {
 					fmt.Println(err)
-					//time.Sleep(1 * time.Second)
 				}
 			}
 		}
