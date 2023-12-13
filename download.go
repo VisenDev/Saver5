@@ -1,12 +1,13 @@
 package main
 
 import (
-	"github.com/gen2brain/dlgs"
+	//"github.com/gen2brain/dlgs"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 	"fmt"
+	"github.com/sqweek/dialog"
 )
 
 //this function creates the UI for the download menu
@@ -31,7 +32,9 @@ func DownloadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 	//?/input.SetPlaceHolder("Enter filepath or select file...")
 	
 	save_button := widget.NewButton("Save To File", func(){
-		filepath, _, err := dlgs.File("Select a file", "", false)
+		//filepath, _, err := dlgs.File("Select a file", "", false)
+		file := dialog.File()
+		filepath, err := file.Save()
 
 		if err != nil {
 			DisplayError(w, "Failed to select file")
