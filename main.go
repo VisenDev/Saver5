@@ -13,7 +13,7 @@ func main() {
 
 	//create a new window and resize it
 	w := a.NewWindow("Saver5")
-	w.Resize(fyne.Size{800, 500})
+	w.Resize(fyne.Size{800, 400})
 
 	//initializing the configuration happens here
 	model := DefaultModel()

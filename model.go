@@ -73,8 +73,8 @@ func DefaultModel() Model {
 		Config: SerialConfig{
 			Port: "",
 			Settings: serial.Mode{
-				//BaudRate: 4800,
-				BaudRate: 230400,
+				BaudRate: 4800,
+				//BaudRate: 230400,
 				Parity:   serial.EvenParity,
 				DataBits: 8,
 				StopBits: serial.OneStopBit,
