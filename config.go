@@ -17,12 +17,7 @@ func SerialSelectionMenu(m *Model,  w *fyne.Window) fyne.CanvasObject {
 	//port_selector_title := widget.NewLabel("Please Select a Port")
 	port_selector := CreateSerialSelection(m)
 	selector := container.New(layout.NewMaxLayout(), port_selector)
-   
-   refresh_button := widget.NewButton("Refresh Serial Ports", func() {
-		port_selector = nil
-      port_selector = CreateSerialSelection(m)
-	})
-	
+
 	progress_bar := widget.NewProgressBarInfinite()
 	progress_bar.Stop()
 	connection_label := widget.NewLabel("Not Connected");
@@ -44,7 +39,16 @@ func SerialSelectionMenu(m *Model,  w *fyne.Window) fyne.CanvasObject {
 		connection_label.SetText("Connected to " + m.Config.Port)
 	})
 
-	content := container.New(layout.NewVBoxLayout(), selector, refresh_button, connect_button)
+	var content fyne.CanvasObject
+	var refresh_button fyne.CanvasObject
+   
+   refresh_button = widget.NewButton("Refresh Serial Ports", func() {
+		port_selector = nil
+      port_selector = CreateSerialSelection(m)
+		content = container.New(layout.NewVBoxLayout(), selector, refresh_button, connect_button)
+	})
+
+	content = container.New(layout.NewVBoxLayout(), selector, refresh_button, connect_button)
 	return container.New(layout.NewVBoxLayout(), content, layout.NewSpacer(), connection_status)
 }
 

@@ -15,6 +15,11 @@ func DownloadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 
 	// Shows a preview of the file contents
 	preview := widget.NewTextGrid()
+
+	// contain the preview in a container with a scroll bar
+	preview_scroll := container.NewScroll(preview)
+	preview_scroll.SetMinSize(fyne.Size{100, 300})
+	
 	model.Listen(func() {
 		fmt.Println("successfully called callback")
 		preview.SetText(string(model.DownloadFileBuffer[0:model.DownloadBufLen]))
@@ -44,5 +49,6 @@ func DownloadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 		}
 	})
 
-	return container.New(layout.NewVBoxLayout(), title, save_button, layout.NewSpacer(), clear_button, preview)
+	button_wrapper := container.New(layout.NewGridLayout(2), save_button, clear_button)
+	return container.New(layout.NewVBoxLayout(), title, button_wrapper, preview_scroll)
 }

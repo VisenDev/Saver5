@@ -49,10 +49,11 @@ func (self *Model) SetDownloadFilepath(path string) error {
 }
 
 func (self *Model) WriteDownloadFile() error {
-	err := os.WriteFile(self.DownloadFilepath, self.DownloadFileBuffer[0:self.DownloadBufLen], 0)
+	err := os.WriteFile(self.DownloadFilepath, self.DownloadFileBuffer[0:self.DownloadBufLen], os.ModePerm)
 	if err != nil {
 		return err
 	}
+	//os.Chmod()
 	return nil
 }
 
@@ -72,8 +73,8 @@ func DefaultModel() Model {
 		Config: SerialConfig{
 			Port: "",
 			Settings: serial.Mode{
-				BaudRate: 4800,
-				//BaudRate: 230400,
+				//BaudRate: 4800,
+				BaudRate: 230400,
 				Parity:   serial.EvenParity,
 				DataBits: 8,
 				StopBits: serial.OneStopBit,
@@ -127,8 +128,8 @@ func (m *Model) Listen(callback func()) {
 				//fmt.Print("read in lines: ")
 				//fmt.Println(n)
 				if err == nil && n > 0 {
-					callback()
 					m.DownloadBufLen += n
+					callback()
 				} else if err != nil {
 					fmt.Println(err)
 				}
