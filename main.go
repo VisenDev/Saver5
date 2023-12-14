@@ -4,6 +4,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
+   "fyne.io/fyne/v2/theme"
 )
 
 //program entry point
@@ -12,18 +13,19 @@ func main() {
 
 	//create a new window and resize it
 	w := a.NewWindow("Saver5")
-	w.Resize(fyne.Size{800, 400})
+	w.Resize(fyne.Size{800, 500})
 
 	//initializing the configuration happens here
 	model := DefaultModel()
-
+   
 	// create tabs for each of our windows
 	tabs := container.NewAppTabs(
-		container.NewTabItem("Serial Port Config", SerialSelectionMenu(&model, &w)),
-		container.NewTabItem("Upload", UploadMenu(&model, &w)),
-		container.NewTabItem("Download", DownloadMenu(&model, &w)),
-		container.NewTabItem("Help", HelpMenu()),
-		container.NewTabItem("About", AboutMenu()),
+      container.NewTabItemWithIcon("Home", theme.HomeIcon(), HomeMenu()),
+		container.NewTabItemWithIcon("Serial Port Config", theme.SettingsIcon(),SerialSelectionMenu(&model, &w)),
+		container.NewTabItemWithIcon("Upload", theme.UploadIcon(), UploadMenu(&model, &w)),
+		container.NewTabItemWithIcon("Download", theme.DownloadIcon(), DownloadMenu(&model, &w)),
+		container.NewTabItemWithIcon("Help", theme.HelpIcon(), HelpMenu()),
+		//container.NewTabItemWithIcon("About", theme.InfoIcon(), AboutMenu()),
 	)
 
 	tabs.SetTabLocation(container.TabLocationLeading)

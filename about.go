@@ -11,7 +11,7 @@ import (
 
 func AboutMenu() fyne.CanvasObject {
 	header := widget.NewRichTextFromMarkdown("# KAGER INDUSTRIES - SAVER5")
-	page_content := widget.NewRichTextFromMarkdown("Written by:\n - Robert Burnett\n \n Designed by:\n - Robert Burnett\n - Connor Bumann\n - Elizabeth Salyards\n - Eduardo Palacious ")
+	page_content := widget.NewRichTextFromMarkdown("Created with GO")
 
 	return container.NewVBox(
 		header,
