@@ -63,7 +63,8 @@ func (self *Model) ReadUploadFile() error {
 	if err != nil {
 		return err
 	}
-	self.UploadFileBuffer = string(bytes)
+	
+	self.UploadFileBuffer = MsdosEncode(string(bytes))//string(bytes)
 	return nil
 }
 
@@ -138,16 +139,16 @@ func (m *Model) Listen(callback func()) {
 	}()
 }
 
-func (m *Model) Save() (int, error) {
-	// m.Port, err := serial.Open(m.Config.Port, &m.Config.Settings)
-	if m.Port == nil {
-		return 0, errors.New("no open port")
-	}
-
-	err := m.ReadUploadFile()
-	if err != nil {
-		return 0, err
-	}
-
-	return m.Port.Write([]byte(m.UploadFileBuffer))
-}
+//func (m *Model) Save() (int, error) {
+//	// m.Port, err := serial.Open(m.Config.Port, &m.Config.Settings)
+//	if m.Port == nil {
+//		return 0, errors.New("no open port")
+//	}
+//
+//	err := m.ReadUploadFile()
+//	if err != nil {
+//		return 0, err
+//	}
+//
+//	return m.Port.Write([]byte(m.UploadFileBuffer))
+//}
