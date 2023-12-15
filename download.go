@@ -6,30 +6,31 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
-	"fmt"
 	"github.com/sqweek/dialog"
 )
 
 //this function creates the UI for the download menu
-func DownloadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
+func DownloadMenu(model *Model, w *fyne.Window, v* View) fyne.CanvasObject {
 
 	// Shows a preview of the file contents
-	preview := widget.NewTextGrid()
+	v.DownloadFileDisplay = widget.NewTextGrid()
 
 	// contain the preview in a container with a scroll bar
-	preview_scroll := container.NewScroll(preview)
+	preview_scroll := container.NewScroll(v.DownloadFileDisplay)
 	preview_scroll.SetMinSize(fyne.Size{100, 300})
 	
 	model.Listen(func() {
-		fmt.Println("successfully called callback")
-		preview.SetText(string(model.DownloadFileBuffer[0:model.DownloadBufLen]))
+		v.Sync(model)
+		//fmt.Println("successfully called callback")
+		//preview.SetText(string(model.DownloadFileBuffer[0:model.DownloadBufLen]))
 	})
 	
 	title := widget.NewRichTextFromMarkdown("# Recieved Text")
 
 	clear_button := widget.NewButton("Clear Buffer", func(){
 		model.DownloadBufLen = 0
-		preview.SetText(string(model.DownloadFileBuffer[0:model.DownloadBufLen]))
+		v.Sync(model)
+		//preview.SetText(string(model.DownloadFileBuffer[0:model.DownloadBufLen]))
 	})
 
 

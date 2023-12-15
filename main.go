@@ -18,6 +18,8 @@ func main() {
 	//initializing the configuration happens here
 	model := DefaultModel()
 	view := CreateView(&w, &model)
+	
+	view.Sync(&model)
    
 	//// create tabs for each of our windows
 	//tabs := container.NewAppTabs(
@@ -32,7 +34,7 @@ func main() {
 	//tabs.SetTabLocation(container.TabLocationLeading)
 
 	//set the content of our window to show the tabs
-	w.SetContent(view.WindowContent)
+	//w.SetContent(view.WindowContent)
 
 	//render the window
 	w.ShowAndRun()

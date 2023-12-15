@@ -10,7 +10,7 @@ import (
 )
 
 // this function returns the UI for the upload menu
-func UploadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
+func UploadMenu(model *Model, w *fyne.Window, v* View) fyne.CanvasObject {
 	title := widget.NewRichTextFromMarkdown("# Upload GCode")
 
 	// input to enter a filepath
@@ -29,10 +29,10 @@ func UploadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 	})
 
 	// Shows a preview of the file contents
-	preview := widget.NewTextGrid()
+	v.UploadFileDisplay = widget.NewTextGrid()
 
 	// contain the preview in a container with a scroll bar
-	preview_wrapper := container.NewScroll(preview)
+	preview_wrapper := container.NewScroll(v.UploadFileDisplay)
 	preview_wrapper.SetMinSize(fyne.Size{100, 300})
 
 	// logic for the preview selected file button
@@ -43,9 +43,9 @@ func UploadMenu(model *Model, w *fyne.Window) fyne.CanvasObject {
 
 		if err != nil {
 			DisplayError(w, "Failed to read file")
-		} else {
-			preview.SetText(model.UploadFileBuffer)
 		}
+		//	preview.SetText(model.UploadFileBuffer)
+			v.Sync(model)
 	})
 
 	// logic for Upload

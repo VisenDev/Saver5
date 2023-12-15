@@ -10,7 +10,7 @@ import (
 	"log"
 )
 
-func SerialSelectionMenu(m *Model,  w *fyne.Window) fyne.CanvasObject {
+func SerialSelectionMenu(m *Model, w *fyne.Window, v *View) fyne.CanvasObject {
 
 	//generate the title widget
 	//title := widget.NewRichTextFromMarkdown("# Serial Configuration")
@@ -18,10 +18,10 @@ func SerialSelectionMenu(m *Model,  w *fyne.Window) fyne.CanvasObject {
 	port_selector := CreateSerialSelection(m)
 	selector := container.New(layout.NewMaxLayout(), port_selector)
 
-	progress_bar := widget.NewProgressBarInfinite()
-	progress_bar.Stop()
-	connection_label := widget.NewLabel("Not Connected");
-	connection_status := container.New(layout.NewVBoxLayout(), connection_label, progress_bar);
+	v.ConnectionStatusDisplay = widget.NewProgressBarInfinite()
+	//v.ConnectionStatusDisplay.Stop()
+	v.ConnectionStatusLabel = widget.NewLabel("Not Connected");
+	connection_status := container.New(layout.NewVBoxLayout(), v.ConnectionStatusLabel, v.ConnectionStatusDisplay);
 	
 	connect_button := widget.NewButton("Check Connection", func() {
 		var err error
@@ -31,12 +31,13 @@ func SerialSelectionMenu(m *Model,  w *fyne.Window) fyne.CanvasObject {
 		//fmt.Println(string(buf))
 		if err != nil {
 			DisplayError(w, "Failed to open port")
-			progress_bar.Stop()
-			connection_label.SetText("Not Connected")
-			return
+			//v.ConnectionStatusDisplay.Stop()
+			//connection_label.SetText("Not Connected")
+			//return
 		}
-		progress_bar.Start()
-		connection_label.SetText("Connected to " + m.Config.Port)
+		v.Sync(m)
+		//progress_bar.Start()
+		//connection_label.SetText("Connected to " + m.Config.Port)
 	})
 
 	var content fyne.CanvasObject
