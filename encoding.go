@@ -15,3 +15,8 @@ func MsdosEncode(s string) string {
 
 	return result
 }
+
+func DetectInvalidGcode(s string) bool {
+	//maybe here I can convert a string to a markdown string highlighting possible errors
+	return false
+}

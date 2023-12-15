@@ -22,7 +22,7 @@ func HomeMenu() fyne.CanvasObject {
 	logo.SetMinSize(fyne.NewSize(100 * logo.Aspect(), 100))
 	logo_wrapper := container.New(layout.NewHBoxLayout(), layout.NewSpacer(), logo, layout.NewSpacer())
   
-   page_content := widget.NewRichTextFromMarkdown("For updates of this application check our github page [link](https://github.com/VisenDev/Saver5)")
+   page_content := widget.NewRichTextFromMarkdown("For **updates** of this application check our github page [link](https://github.com/VisenDev/Saver5)")
    page_content2 := widget.NewRichTextFromMarkdown("\n Written by: \n - Robert Burnett \n \n Designed by:\n - Robert Burnett\n - Connor Bumann\n - Elizabeth Salyards\n - Eduardo Palacios")
    return container.New(layout.NewVBoxLayout(), logo_wrapper, title, page_content, page_content2)
 }
